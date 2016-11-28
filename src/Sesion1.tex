@@ -1,0 +1,986 @@
+% Author : Juan Garcia Garland
+% LIcense: GPLv3 
+
+\documentclass{beamer}
+%\usepackage{beamerthemesplit} % new
+\usetheme{Warsaw}
+\usepackage{bussproofs}
+\begin{document}
+\title{Teor\'ia de Tipos intensional de Martin-L\"of} 
+\author{Juan Pablo Garc\'ia Garland} 
+\date{18 de noviembre, 2016} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Table of contents}\tableofcontents} 
+
+
+\section{Marco L\'ogico} 
+%\subsection{Nociones sem\'anticas}
+
+\frame{\frametitle{Tipos} 
+  "A type is explained by saying what an object of the type is and what it
+  means for two objects of the types to be identical"[NPS00].  
+}
+
+
+\frame{\frametitle{Tipos}
+  Se definen con:
+  \begin{itemize}
+  \item
+    Reglas de Introduccci\'on.
+  \item
+    Reglas de Igualdad.
+  \end{itemize}
+}
+
+\frame{\frametitle{Juicios}
+  \begin{itemize}
+  \item
+    $A$ Type
+  \item
+    $a \in A$
+  \item
+    $a = b \in A$
+    \pause
+  \item
+    $A = B$
+  \end{itemize}
+}
+
+\begin{frame}
+  \frametitle{Significado}
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{$A$ Type} & \textbf{$a \in A$} \\
+    \hline
+    $A$ es un conjunto (Tipo) & $a$ es un elemento del conjunto (Tipo) $A$\\
+    \hline
+  \end{tabular}
+\end{frame}
+\begin{frame}
+  \frametitle{Significado}
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{$A$ Type} & \textbf{$a \in A$} \\
+    \hline
+    $A$ es un conjunto & $a$ es un elemento del conjunto $A$\\
+    \hline
+    $A$ es una proposici\'on & $a$ es una prueba de $A$ \\
+    \hline
+  \end{tabular}
+\end{frame}
+\begin{frame}
+  \frametitle{Significado}
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{$A$ Type} & \textbf{$a \in A$} \\
+    \hline
+    $A$ es un conjunto & $a$ es un elemento del conjunto $A$\\
+    \hline
+    $A$ es una proposici\'on & $a$ es una prueba de $A$ \\
+    \hline
+    $A$ es una especificaci\'on & $a$ es un programa que satisface $A$ \\
+    \hline
+  \end{tabular}
+\end{frame}
+\begin{frame}
+  \frametitle{Significado}
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{$A$ Type} & \textbf{$a \in A$} \\
+    \hline
+    $A$ es un conjunto & $a$ es un elemento del conjunto $A$\\
+    \hline
+    $A$ es una proposici\'on & $a$ es una prueba de $A$ \\
+    \hline
+    $A$ es una especificaci\'on & $a$ es un programa que satisface $A$ \\
+    \hline
+    $A$ es un problema & $a$ es una soluci\'on para $A$ \\
+    \hline
+
+  \end{tabular}
+\end{frame}
+
+%\subsection{Reglas Generales (Sobre todos los tipos)}
+
+\begin{frame}\frametitle{Reglas Generales}
+  \begin{columns}
+    \begin{column}{.48\textwidth}
+      Sobre objetos:
+
+      \pause
+      \begin{itemize}  
+      \item
+        Reflexividad:
+        
+        \begin{prooftree}
+          \AxiomC{$a \in A$}
+          \UnaryInfC{$a = a \in A$}
+        \end{prooftree}
+
+        \pause
+      \item
+        Simetr\'ia:
+        
+        \begin{prooftree}
+          \AxiomC{$a = b \in A$}
+          \UnaryInfC{$b = a \in A$}
+        \end{prooftree}
+
+        \pause
+      \item
+        Transitividad:
+        \begin{prooftree}
+          \AxiomC{$a = b \in A$}
+          \AxiomC{$b = c \in A$}
+          \BinaryInfC{$a = c \in A$}
+        \end{prooftree}
+      \end{itemize}
+    \end{column}
+    \hfill%
+    \pause
+    \begin{column}{.48\textwidth}
+      Sobre Tipos:
+      
+      \begin{itemize}
+        
+      \item
+        Reflexividad:
+        
+        \begin{prooftree}
+          \AxiomC{}
+          \UnaryInfC{$A = A$}
+        \end{prooftree}
+      \item
+        Simetr\'ia:
+        
+        \begin{prooftree}
+          \AxiomC{$A = B$}
+          \UnaryInfC{$B = A$}
+        \end{prooftree}
+
+      \item
+        Transitividad:
+        
+        \begin{prooftree}
+          \AxiomC{$A = B$}
+          \AxiomC{$B = C$}
+          \BinaryInfC{$A = C$}
+        \end{prooftree}
+      \end{itemize}
+    \end{column}
+      
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}\frametitle{M\'as Reglas Generales}
+
+  Reglas de igualdad de tipos:
+  
+  \begin{columns}
+    \begin{column}{.48\textwidth}
+
+      \begin{prooftree}
+        \AxiomC{$ a \in A$}
+        \AxiomC{$A = B$}
+        \BinaryInfC{$a \in B$}
+      \end{prooftree}
+      
+    \end{column}
+    \begin{column}{.48\textwidth}
+
+      \begin{prooftree}
+        \AxiomC{$a=b \in A$}
+        \AxiomC{$A = B$}
+        \BinaryInfC{$a=b \in B$}
+      \end{prooftree}
+      
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+%\subsection{Juicios Hipot\'eticos}
+\frame{ \frametitle{Juicios Hipot\'eticos}
+  En su forma m\'as general los cuatro juicios pueden depender de algunas
+  hip\'otesis.
+  \pause
+  Se introduce la noci\'on de contexto.
+
+  $$\Gamma := x_1 \in A_1, ..., x_n \in A_n$$
+
+  \pause
+  Escribimos:
+  
+  $A$ type $[\Gamma]$
+
+  $a \in A$ $[\Gamma]$
+
+  $A = A'$ $[\Gamma]$
+
+  $a = b \in A$ $[\Gamma]$
+  
+}
+
+\frame{ \frametitle{Juicios Hipot\'eticos}
+
+}
+
+
+
+\section{Tipos Funcionales}
+%\subsection{Formaci\'on}
+\begin{frame}\frametitle{Tipos Funcionales (Function Types)}
+
+  Una de las formas primitivas de constuir nuevos tipos a partir de otros,
+  ser\'a introduciendo tipos funcionales \pause (dependientes).
+  \pause
+
+  Dado un tipo $A$, y una familia de tipos $B$ indizados por $A$,
+  construimos el conjunto funcional (dependiente) $(x\in A)B$ de funciones de
+  $A$ a $B$.
+
+  \pause
+  Qu\'e necesitamos?
+  \pause
+  \begin{itemize}
+  \item
+    Reglas de constucci\'on
+  \item
+    Reglas de igualdad
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Tipos Funcionales (Function Types)}
+ Tipo funcional:
+  \begin{prooftree}
+    \AxiomC{$A$  type}
+    \AxiomC{$B$  type $[x \in A]$}
+    \BinaryInfC{$(x \in A) B$  type}
+  \end{prooftree}
+
+  \pause
+
+  Igualdad de tipos funcionales:
+  \begin{prooftree}
+    \AxiomC{$A = A' $}
+    \AxiomC{$B = B' [x \in A]$}
+    \BinaryInfC{$(x \in A) B = (x \in A') B'$}
+  \end{prooftree}
+\end{frame}
+
+\begin{frame}\frametitle{Notaci\'on}
+  \pause
+  \begin{itemize}
+  \item
+    Escribimos $(A)B$ para denotar $(x\in A)B$ cuando el producto
+    no es dependiente (tipo flecha usual).   
+    \pause
+  \item
+    Escribimos $(x\in A, y \in B)C$ para denotar $(x\in A)((y \in B)C)$
+    \pause
+  \item
+    Escribimos $(x, y \in A)C$ para denotar $(x\in A)((y \in A)C)$
+ 
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Abstracci\'on}
+  \pause
+  Abstracci\'on:
+
+  \begin{prooftree}
+    \AxiomC{$b \in B[x \in A] $}
+    \UnaryInfC{$ ([x \in A] b) \in (x\in A)B$}
+  \end{prooftree}
+  
+
+\end{frame}
+
+
+\begin{frame}\frametitle{M\'as Reglas}
+  Reglas de Aplicaci\'on:
+  \pause
+  \begin{columns}
+    \begin{column}{.48\textwidth}
+
+      \begin{prooftree}
+        \AxiomC{$c \in (x \in A)B $}
+        \AxiomC{$a \in A$}
+        \BinaryInfC{$c(a) \in B [a/x]$}
+      \end{prooftree}
+    \end{column}
+
+    \begin{column}{.48\textwidth}
+
+      \begin{prooftree}
+        \AxiomC{$c \in (x \in A)B $}
+        \AxiomC{$a = b \in A$}
+        \BinaryInfC{$ c(a) = c(b) \in B[a/x]$}
+      \end{prooftree}
+    \end{column}
+    
+  \end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Reglas sobre igualdad de funciones}
+  \pause
+
+  Aplicaci\'on:
+  
+  \begin{prooftree}
+    \AxiomC{$c = d \in (x \in A)B $}
+    \AxiomC{$a \in A$}
+    \BinaryInfC{$c(a) = d(a) \in B [a/x]$}
+  \end{prooftree}
+
+  \pause
+  Extensionalidad:
+  
+  \begin{prooftree}
+    \AxiomC{$c \in (x \in A)B $}
+    \AxiomC{$d \in (x \in A)B $}
+    \AxiomC{$c(x) = d(x) \in B[x \in A]$}
+    \TrinaryInfC{$ c = d \in (x\in A)B$}
+  \end{prooftree}
+  
+\end{frame} 
+
+
+
+\begin{frame}\frametitle{Notaci\'on}
+  \pause
+  \begin{itemize}
+  \item
+    Escribimos $c(a_1,a_2,...a_n)$ para denotar $c(a_1)(a_2) .. (a_n)$
+    \pause
+  \item
+    Escribimos $[x_1 \in A_1, x_2 \in A_2, .. x_n \in A_n]b$
+    para denotar $[x_1 \in A_1][x_2 \in A_2]..[x_n \in A_n]b$
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Computando}
+  \pause
+
+\begin{itemize}
+
+  \item
+  $\beta$-conversi\'on:
+  \begin{prooftree}
+    \AxiomC{$a \in A $}
+    \AxiomC{$b \in B [x \in A]$}
+    \BinaryInfC{$ ([x \in A]b)(a) = b [a/x] \in B[a/x]$}
+  \end{prooftree}
+
+  \pause
+
+  \vskip 1em
+  \hskip -3em
+  %\begin{fushleft}
+  Las siguientes reglas se pueden probar a partr de las anteriores:
+  %\end{flushleft}
+  \item
+  \pause
+  $\eta$-conversi\'on:
+  \begin{prooftree}
+    \AxiomC{$c \in (x\in A)B$}
+    \UnaryInfC{$ ([x \in a]c(x)) = c \in (x \in A)B$}
+  \end{prooftree}
+
+  \pause
+ % \hskip 10em
+ % ($x$ no ocurre libre en $c$)
+  
+  
+
+\item
+  $\xi$-rule:
+
+  \begin{prooftree}
+     \AxiomC{$b = d \in B[x \in A] $}
+     \UnaryInfC{$ ([x\in A]b = [x\in A]d \in (x \in A)B$}
+  \end{prooftree}
+
+  \end{itemize}
+
+\end{frame}
+
+\section{El tipo $Set$} 
+
+\begin{frame}\frametitle{El tipo $Set$}
+  La teor\'ia de tipos intensional introduce un tipo particular, $Set$,
+  cuyos objetos son los conjuntos definidos inductivamente.
+  \pause
+  
+  $Set$ es un tipo, entonces..
+  \pause
+  
+  Tenemos que definir qu\'e significa ser un $Set$
+  (reglas de construcci\'on)
+  y cuando dos objetos de $Set$ son iguales (reglas de igualdad).
+  \pause 
+\end{frame}
+
+\begin{frame}\frametitle{Construyendo Sets}
+  Se construyen mediante la introducci\'on de constantes.
+
+  \pause
+  Los objetos can\'onicos de tipo $Set$ son de la forma:
+  \begin{center}
+    $c(a_1,...,a_n) \in Set$
+  \end{center}
+
+  en donde $c \in (x_1 \in A_1, ... , x_n \in A_n)Set$ es un
+  \emph{constructor de conjuntos}
+\end{frame}
+
+\begin{frame}\frametitle{Construyendo Sets}
+  Ejemplos:
+  
+  $$bool \in Set$$
+  $$nat  \in Set$$
+  $$prod \in (Set,Set)Set$$
+  $$\Sigma \in (A:Set, (A)Set) Set $$
+\end{frame}
+
+\begin{frame}\frametitle{Formaci\'on de $Set$, Formaci\'on de $El$}
+
+  Introducimos la siguiente reglas:
+  \pause
+  
+  Formaci\'on de $Set$: 
+  \begin{prooftree}
+    \AxiomC{}
+    \UnaryInfC{$Set$ type}
+  \end{prooftree}
+
+  \pause
+  Para cada objeto $A$ de $Set$ se define un tipo $El(A)$ cuyos objetos son
+  los elementos del $Set$ $A$. 
+
+  \pause
+  
+  Formaci\'on de $El$:
+  
+  \begin{prooftree}
+    \AxiomC{$a \in Set$}
+    \UnaryInfC{$El(a)$ type}
+  \end{prooftree}
+\end{frame}
+
+\begin{frame} \frametitle{Set es abierto}
+  \pause
+  \begin{itemize}
+  \item
+    El tipo $Set$ tiene definici\'on abierta.
+    \pause
+    i.e. puede extenderse con nuevas definiciones.
+
+    \pause
+  \item
+    Los tipos $El(a)$ son cerrados, dado que las nuevas definiciones en
+    $Set$ son inductivas.
+   
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}\frametitle{Notaci\'on}
+  \pause
+  \begin{itemize}
+  \item
+    Escribimos $a$ en lugar de $El(a)$.
+    \pause
+
+    El objeto $a \in Set$ y el tipo $El(a)$ siempre ocurren en contextos
+    distintos, por lo que no hay ambig\"uedad.
+    
+  \end{itemize}
+\end{frame}
+
+
+
+\section{Construyendo Sets}
+
+
+\begin{frame}
+  Un conjunto (o familia) de conjuntos inductivos se define introduciendo
+  las siguientes constantes:
+
+  \pause
+  \begin{itemize}
+  \item
+    Un \emph{constructor de conjunto}
+    \begin{center}
+      $C \in (\vec{x} \in \vec{A})Set$
+    \end{center}
+    
+    \pause
+  \item
+    Constructores $c_1, c_2, ..., c_n$ que definen los objetos de
+    tipo $El(C(\vec{a}))$
+    
+    \pause
+  \item
+    Un destructor gen\'erico $d$ asociado a la familia $C$.
+    \pause
+
+  \item
+    Reglas de igualdad que describen el comportamiento de $d$ respecto de los
+    constructores.
+    
+  \end{itemize}  
+\end{frame}
+
+\begin{frame}
+  Ejemplos de Sets
+\end{frame}
+
+\subsection{bool}
+\begin{frame}\frametitle{El conjunto de los valores booleanos}
+  Definimos al set de los valores Booleanos.
+  \pause
+
+  Es un ejemplo de conjunto enumerado (es trivialmente recursivo).
+  \pause
+\end{frame}
+
+\begin{frame}{Declarando $bool$}
+  Decl\'arense las siguientes constantes:\\
+
+  \pause
+
+  El constructor del conjunto:
+  
+  \pause
+  \begin{center}
+    $bool \in Set$
+  \end{center}
+  \pause
+  
+  Los constructores:
+  
+  \pause
+
+  \begin{center}
+    
+    $true \in bool$
+
+    $false \in bool$
+    
+  \end{center}
+  
+ 
+\end{frame}
+
+\begin{frame}{Declarando $bool$}
+  Decl\'arense las siguientes constantes:\\
+
+  El constructor del conjunto:
+  
+ 
+  \begin{center}
+    $bool \in Set$
+  \end{center}
+  
+  Los constructores:
+  
+  
+  \begin{center}
+    
+    $true \in El(bool)$
+
+    $false \in El(bool)$
+    
+  \end{center}
+  
+
+\end{frame}
+
+
+\begin{frame}{Destructor de $bool$}
+  \pause
+  
+  La constante para la destrucci\'on de los Booleanos:
+
+  \pause
+  
+  \begin{center}
+    $boolrec \in (P \in (bool)Set, P(true),P(false), b \in bool) P(b)$
+  \end{center}
+
+  \pause
+  Las reglas de igualdad:
+
+  \begin{center}
+    $boolrec(P,P_t,P_f,true) = P_t \in P(true)$
+    
+    $boolrec(P,P_t,P_f,false) = P_f \in P(false)$
+  \end{center}
+  
+
+\end{frame}
+
+\begin{frame}{Destructor de $bool$}
+   
+  La constante para la destrucci\'on de los Booleanos:
+
+   
+  \begin{center}
+    $boolrec \in (P \in (El(bool))Set, El(P(true)),El(P(false)),
+    b \in El(bool)) El(P(b))$
+  \end{center}
+
+
+  Las reglas de igualdad:
+
+  \begin{center}
+    $boolrec(P,P_t,P_f,true) = P_t \in P(true)$
+    
+    $boolrec(P,P_t,P_f,false) = P_f \in P(false)$
+  \end{center}
+  
+ 
+\end{frame}
+
+
+\begin{frame}
+
+  En particular, podemos construir a partir de este
+  un caso mas d\'ebil, no dependiente:
+
+  \begin{center}
+    $boolelim \in (P \in Set, P , P, bool) P $
+  \end{center}
+
+  \pause
+
+  Se construye como:
+
+  \begin{center}
+    $boolelim := [P \in Set] boolrec ([\_\in bool] P)$
+  \end{center}
+
+  \pause
+
+  Corresponde a la primitiva if-then-else.
+  
+\end{frame}
+
+
+\subsection{unit}
+\begin{frame}\frametitle{Declarando $unit$}
+  Definimos al set de un \'unico habitante.
+  \pause
+
+\end{frame}
+
+\begin{frame}{Declarando $unit$}
+  Decl\'arense las siguientes constantes:\\
+
+  \pause
+
+  El constructor del conjunto:
+  
+  \pause
+  \begin{center}
+    $unit \in Set$
+  \end{center}
+  \pause
+  
+  La constante para el constructor:
+  
+  \pause
+
+  \begin{center}
+    
+    $<> \in unit$
+ 
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Selectores de $unit$}
+  \pause
+  
+  La constante para la selecci\'on en $unit$ (destructor):
+
+  \pause
+  
+  \begin{center}
+    $unitrec \in (P \in (unit)Set, P(<>),u \in unit) P(u)$
+  \end{center}
+
+  \pause
+  La regla de igualdad::
+
+  \begin{center}
+    $unitrec(P,p,<>) = p \in P(<>)$
+  \end{center}
+  
+
+\end{frame}
+
+
+\begin{frame}
+
+  En particular, podemos construir a partir de este
+  un caso mas d\'ebil, no dependiente:
+
+  \begin{center}
+    $unitelim \in (P \in Set, P, unit) P $
+  \end{center}
+
+  \pause
+
+  Se construye como:
+
+  \begin{center}
+    $ unitelim := [P \in Set] unitrec ([\_\in unit] P)$
+  \end{center}
+
+  \pause
+  
+\end{frame}
+
+
+
+
+\subsection{empty}
+
+
+
+\begin{frame}{El conjunto vac\'io}
+  Decl\'arense las siguientes constantes:\\
+
+  \pause
+
+  El constructor del conjunto:
+  
+  \pause
+  \begin{center}
+    $empty \in Set$
+  \end{center}
+  \pause
+  
+  No hay constructores  
+
+  \pause
+  La constante para la destrucci\'on:
+
+  \pause
+  
+  \begin{center}
+    $emptyrec \in (P \in (empty)Set, e \in empty) P(e)$
+  \end{center}
+
+  \pause
+  No hay reglas de igualdad:
+  
+\end{frame}
+
+
+\begin{frame}
+
+  En particular, podemos construir a partir de este
+  un caso mas d\'ebil, no dependiente:
+
+  \begin{center}
+    $emptyelim \in (P \in Set, empty) P $
+  \end{center}
+
+  \pause
+
+  Se construye como:
+
+  \begin{center}
+    $emptyelim := [P \in Set] emptyrec ([ \_ \in empty]P)$
+  \end{center}
+
+  \pause
+
+  Corresponde a al principio \emph{ex falso quodlibet}.
+
+  \pause
+
+  El conjunto $empty$ constituye una representaci\'on adecuada de la
+  proposici\'on absurda.
+
+  \pause
+  As\'i como $unit$ de la trivial.
+
+\end{frame}
+
+
+
+
+
+
+\subsection{nat}
+
+\begin{frame}\frametitle{El conjunto de los naturales}
+
+  \pause
+  Decl\'arense las siguientes constantes:
+  \pause
+
+  El constructor del conjunto:
+
+  \begin{center}
+    $nat \in Set$
+  \end{center}
+
+  \pause
+
+  Los constructores:
+
+  $$ 0 \in nat$$
+  $$ S \in (nat)nat$$
+  
+\end{frame}\frametitle{El conjunto de los naturales}
+
+
+\begin{frame}
+
+El destructor gen\'erico:
+
+$$natrec \in (P \in (nat)Set, P(0), (n \in nat, P(n))P(S(n)), n\in nat )P(n)$$
+\pause
+
+Las reglas de igualdad:
+
+$$natrec(P,p_0,p_s,0) = p_0 \in P(0)$$
+$$natrec(P,p_0,p_s,S(n)) = p_s(n,natrec(P,p_0,p_s,n)) \in P(S(n))$$
+
+\end{frame}
+
+
+\begin{frame}\frametitle{El conjunto de los naturales}
+  Eliminaci\'on no dependiente:
+
+  $$natelim \in (P\in Set, P, (nat,P)P, nat)P $$
+  $$natelim := [P\in Set] natrec([ \_ \in nat]P)$$
+\end{frame}
+
+\begin{frame}\frametitle{Programando con nats}
+
+  Ejemplos de implementaciones:
+  \pause
+
+  \begin{itemize}
+  \item
+    $plus \in (nat,nat)nat $\pause
+    
+    $$plus := [x,y \in nat] natelim (nat,x,[\_,z\in nat]S(z), y) $$
+    
+    \pause
+
+    \item
+      $mult \in (nat,nat)nat $\pause
+      
+      $$mult := [x,y \in nat] natelim (nat,0,[\_,z\in nat]plus(z,x), y) $$
+
+      \pause
+    \item
+      $pred \in (nat)nat $\pause
+      
+      $$pred := [x \in nat] natelim (nat,0,[z, \_ \in nat] z,x)$$
+  \end{itemize}  
+\end{frame}
+
+
+
+\subsection{prod}
+
+\begin{frame}\frametitle{El producto cartesiano prod}
+  Se considera la \emph{familia} de conjuntos definida por:
+
+  \pause
+
+  El constructor de conjuntos:
+  
+  $$prod \in (A, B \in Set)Set$$
+    
+  \pause
+
+  El constructor:
+
+  $$pair \in (A,B \in Set, A, B)prod(A,B) $$
+\end{frame}
+
+\begin{frame}\frametitle{El producto cartesiano prod}
+  \pause
+
+  El destructor:
+
+  
+  $$prodrec \in (A,B \in Set, P \in (A \times B)Set,$$
+  $$(a \in A, b \in B)P(pair(A,B,a,b)), p \in A \times B) P(p)$$
+    
+  \pause
+
+ La regla de igualdad:
+
+  $$prodrec(A,B,P,f,pair(A,B,a,b)) = f(a,b) \in P(pair(A,B,a,b)) $$
+
+ \pause
+ Se pueden implementar $fst$, $snd$
+ 
+\end{frame}
+
+
+
+
+\subsection{sum}
+
+
+\begin{frame}\frametitle{La suma directa sum}
+  Se considera la \emph{familia} de conjuntos definida por:
+
+  \pause
+
+  El constructor de conjuntos:
+  
+  $$sum \in (A, B \in Set)Set$$
+    
+  \pause
+
+  Los constructores:
+
+  $$left \in (A,B \in Set, A)sum(A,B) $$
+  $$right \in (A,B \in Set,B)sum(A,B) $$
+\end{frame}
+
+\begin{frame}\frametitle{La suma directa sum}
+  \pause
+
+  El destructor:
+
+  
+  $$sumrec \in (A,B\in Set, P\in (A+B)Set,$$
+  $$ (a\in A)P(left A,B,a),(b\in B)P(right(A,B,b)),$$
+  $$p\in A+B) P(p)$$
+    
+  \pause
+
+ Las regla de igualdad:
+
+ $$sumrec(A,B,P,f,g,left(A,B,a)) = f(a) \in P(left(A,B,a))$$
+
+ $$sumrec(A,B,P,f,g,right(A,B,b)) = g(b) \in P(right(A,B,b))$$
+ 
+ \pause
+ 
+\end{frame}
+
+
+
+\end{document}
+
+
